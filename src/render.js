@@ -1,46 +1,31 @@
-const Player = require('./player');
-const Gameboard = require('./gameboard');
-const Ship = require('./ship');
+const contentBox = document.getElementById('content-box');
+const boardsBox = document.createElement('div')
+boardsBox.classList.add('boards-box');
+contentBox.append(boardsBox);
 
-
-const realPlayer = new Player(false);
-const computerPlayer = new Player(true);
-
-const ship2 = new Ship(2);
-const ship3 = new Ship(3);
-const ship4 = new Ship(4);
-const ship5 = new Ship(5);
-
-function getRandomIntInclusive(min, max) {
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
-function randomPlaceShip(ship, player) {
-    const directions = ["horizontal", "vertical"];
-    while (true) {
-        let index = getRandomIntInclusive(0, 1);
-        let x = getRandomIntInclusive(0, 9);
-        let y = getRandomIntInclusive(0, 9);
-        const placed = player.gameboard.placeShip(ship, x, y, directions[index])
-        if (placed) {
-            return true;
+function makeBoard(player) {
+    const gameboardBox = document.createElement("div");
+    gameboardBox.classList.add('gameboard');
+    gameboardBox.dataset.player = player.isComputer ? "computer" : "real";
+    boardsBox.append(gameboardBox);
+    for (let row = 0; row < player.gameboard.board.length; row++) {
+        for (let col = 0; col < player.gameboard.board[row].length; col++) {
+            let button = document.createElement('button');
+            button.dataset.row = row.toString();
+            button.dataset.col = col.toString();
+            if (player.isComputer === false) {
+                if (player.gameboard.board[row][col] !== null) {
+                    button.classList.add('board-btn');
+                    button.classList.add('ship-btn');
+                } else {
+                    button.classList.add('board-btn');
+                }
+            } else {
+                button.classList.add('board-btn');
+            }
+            gameboardBox.appendChild(button);
         }
     }
 }
 
-randomPlaceShip(ship2, realPlayer);
-randomPlaceShip(ship3, realPlayer);
-randomPlaceShip(ship3, realPlayer);
-randomPlaceShip(ship4, realPlayer);
-randomPlaceShip(ship5, realPlayer);
-
-
-randomPlaceShip(ship2, computerPlayer);
-randomPlaceShip(ship3, computerPlayer);
-randomPlaceShip(ship3, computerPlayer);
-randomPlaceShip(ship4, computerPlayer);
-randomPlaceShip(ship5, computerPlayer);
-
-console.log(realPlayer.gameboard.ships.length);
+module.exports = makeBoard;

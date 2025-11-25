@@ -36,10 +36,10 @@ class Gameboard {
         let cell = this.board[x][y];
         this.attackedCells.add(key);
         if (cell !== null) {
-            this.hitedShipCells.push([x, y]);
+            this.hitedShipCells.push([x.toString(), y.toString()]);
             return cell.hit();
         } else {
-            this.missedAttacks.push([x, y]);
+            this.missedAttacks.push([x.toString(), y.toString()]);
         }
 
     }

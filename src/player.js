@@ -12,18 +12,21 @@ class Player {
         this.gameboard = new Gameboard();
     }
 
-    attack(player, x, y) {
-        if (player.isComputer) {
-            if (x === undefined || y === undefined) {
+    attack(otherPlayer, x, y) {
+        if (!this.isComputer) {
+            if (otherPlayer.gameboard.attackedCells.has(`${x},${y}`)) {
                 return false;
             }
-            player.gameboard.receiveAttack(x, y);
-
-        } else {
-            let randX = getRandomIntInclusive(0, 9);
-            let randY = getRandomIntInclusive(0, 9);
-            player.gameboard.receiveAttack(randX, randY);
+            otherPlayer.gameboard.receiveAttack(x, y);
+            return true;
         }
+        let randX = getRandomIntInclusive(0, 9);
+        let randY = getRandomIntInclusive(0, 9);
+        while (otherPlayer.gameboard.attackedCells.has(`${randX},${randY}`)) {
+            randX = getRandomIntInclusive(0, 9);
+            randY = getRandomIntInclusive(0, 9);
+        }
+        otherPlayer.gameboard.receiveAttack(randX, randY);
     }
 }
 
