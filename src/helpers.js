@@ -1,3 +1,5 @@
+const makeBoard = require("./render");
+
 function getRandomIntInclusive(min, max) {
     min = Math.ceil(min);
     max = Math.floor(max);
@@ -17,4 +19,16 @@ function randomPlaceShip(ship, player) {
     }
 }
 
-module.exports = randomPlaceShip;
+function cleanerPlayer(player) {
+    player.gameboard.board = Array(10).fill(null).map(() => Array(10).fill(null));
+    player.gameboard.ships = [];
+    player.gameboard.missedAttacks = [];
+    player.gameboard.hitedShipCells = [];
+    player.gameboard.attackedCells = new Set();
+
+}
+
+module.exports = {
+    randomPlaceShip,
+    cleanerPlayer
+};

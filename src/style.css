@@ -15,8 +15,8 @@ body {
 }
 
 .content-box {
-    height: 100%;
-    width: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 .gameboard {
@@ -52,4 +52,12 @@ body {
 
 .hited {
     background-color: orange;
+}
+
+.active {
+    background-color: green;
+}
+
+.invalid {
+    background-color: red;
 }

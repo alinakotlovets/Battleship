@@ -8,19 +8,22 @@ class Gameboard {
     }
 
     placeShip(ship, start, end, direction) {
-        if (start >= 10 || end >= 10 || start + ship.length >= 10 || end + ship.length >= 10) {
-            return false;
+        if (direction === "horizontal") {
+            if (start < 0 || start >= 10 || end < 0 || end + ship.length > 10) return false;
+        } else {
+            if (start < 0 || start + ship.length > 10 || end < 0 || end >= 10) return false;
         }
+
         for (let i = 0; i < ship.length; i++) {
-            let x = direction === "horizontal" ? start + i : start;
-            let y = direction === "horizontal" ? end : end + i;
+            let x = direction === "horizontal" ? start : start + i;
+            let y = direction === "horizontal" ? end + i : end;
             if (this.board[x][y] !== null) {
                 return false;
             }
         }
         for (let i = 0; i < ship.length; i++) {
-            let x = direction === "horizontal" ? start + i : start;
-            let y = direction === "horizontal" ? end : end + i;
+            let x = direction === "horizontal" ? start : start + i;
+            let y = direction === "horizontal" ? end + i : end;
             this.board[x][y] = ship;
         }
         this.ships.push(ship);
