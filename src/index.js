@@ -28,7 +28,7 @@ const {handleEnter, handleLeave} = initHoverPreview(
     getSelectedShip
 );
 
-placeShipBnt(controls.placeBtnBox)
+placeShipBnt(controls.placeBox)
 const {placingShip} = initPlaceShip(realPlayer, computerPlayer, makeBoard, handleEnter, handleLeave);
 
 const gameController = initNewGameHandler({
@@ -54,6 +54,8 @@ setRandomPlaceShip(computerPlayer);
 
 makeBoard(realPlayer);
 makeBoard(computerPlayer);
+console.log(document.querySelectorAll('.board-btn').length);
+console.log(document.querySelector('.gameboard[data-player="real"]'));
 
 document.querySelectorAll('.gameboard[data-player="real"] .board-btn').forEach(btn => {
     btn.addEventListener("mouseenter", handleEnter);

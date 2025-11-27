@@ -1,3 +1,61 @@
+:root {
+    --blue--900: #02012C;
+    --green-300: #6a994e;
+    --green-400: #4f772d;
+    --red-200: #d62828;
+    --red-300: #9e2a2b;
+    --grey-600: #495057;
+    --white: #FFF;
+    --blue-200: #118ab2;
+    --blue--500: #415a77;
+    --blue--400: #778da9;
+    --blue-300: #6096ba;
+    --space-0px: 0;
+    --space-10px: 0.625rem;
+    --space-12px: 0.75rem;
+    --space-16px: 1rem;
+    --space-20px: 1.25rem;
+    --space-24px: 1.5rem;
+    --space-32px: 2rem;
+    --space-36px: 2.25rem;
+    --space-40px: 2.5rem;
+    --space-48px: 3rem;
+    --space-64px: 4rem;
+    --space-80px: 5rem;
+    --space-96px: 6rem;
+    --space-112px: 7rem;
+    --space-128px: 8rem;
+    --space-132px: 8.25rem;
+    --space-140px: 8.75rem;
+    --radius-0: 0;
+    --radius-4: 0.25rem;
+    --radius-6: 0.375rem;
+    --radius-8: 0.5rem;
+    --radius-10: 0.625rem;
+    --radius-12: 0.75rem;
+    --radius-16: 1rem;
+    --radius-20: 1.25rem;
+    --radius-24: 1.5rem;
+    --radius-full: 999px;
+    --text-xs: 0.75rem;
+    --text-xs--line-height: calc(1 / 0.75);
+    --text-sm: 0.875rem;
+    --text-sm--line-height: calc(1.25 / 0.875);
+    --text-lg: 1.125rem;
+    --text-lg--line-height: calc(1.75 / 1.125);
+    --text-2xl: 1.5rem;
+    --text-2xl--line-height: calc(2 / 1.5);
+    --text-3xl: 1.875rem;
+    --text-3xl--line-height: calc(2.25 / 1.875);
+    --text-5xl: 3rem;
+    --text-5xl--line-height: 1;
+    --text-7xl: 4.5rem;
+    --text-7xl--line-height: 1;
+    --font-weight-light: 300;
+    --font-weight-medium: 500;
+    --transition: 300ms ease-in-out;
+}
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -10,11 +68,21 @@ html {
 }
 
 body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    margin: var(--space-0px);
     height: 100%;
     width: 100%;
 }
 
+
 .content-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.controller-box {
     display: flex;
     flex-direction: column;
 }
@@ -25,17 +93,6 @@ body {
     display: grid;
     grid-template-columns: repeat(10, 1fr);
     grid-template-rows: repeat(10, 1fr);
-
-}
-
-.ship-btn {
-    background-color: lightblue;
-}
-
-.ship-btn,
-.board-btn {
-    width: 100%;
-    height: 100%;
 }
 
 .boards-box {
@@ -46,18 +103,175 @@ body {
     margin-top: 3rem;
 }
 
+.board-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: var(--space-12px);
+}
+
+
+.ship-btn {
+    background-color: var(--grey-600);
+}
+
+.place-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+    gap: 10px;
+}
+
+
+.place-btn-box {
+    display: flex;
+    gap: 10px;
+}
+
+.main-nav-btn-box {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+
+.ship-btn,
+.board-btn {
+    width: 100%;
+    height: 100%;
+}
+
+
+.winner-box {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    align-items: center;
+}
+
 .missed {
-    background-color: blueviolet;
+    background-color: var(--green-400);
 }
 
 .hited {
-    background-color: orange;
+    background-color: var(--red-300);
 }
 
 .active {
-    background-color: green;
+    background-color: var(--green-300);
 }
 
 .invalid {
-    background-color: red;
+    background-color: var(--red-200);
+}
+
+
+.button--small {
+    width: var(--space-132px);
+    height: var(--space-36px);
+    border-radius: var(--radius-4);
+    border: none;
+}
+
+.button--large {
+    height: var(--space-40px);
+    width: var(--space-140px);
+    border-radius: var(--radius-6);
+    border: none;
+}
+
+.button--primary {
+    background-color: var(--blue-200);
+    color: var(--white);
+    transition: background-color var(--transition);
+}
+
+.button--primary:hover,
+.button--primary:focus {
+    background-color: var(--blue-300);
+}
+
+button:disabled {
+    background-color: #ced4da;
+    color: var(--blue--900);
+}
+
+button:disabled:hover,
+button:disabled:focus {
+    background-color: #ced4da;
+    color: var(--blue--900);
+}
+
+.button--red {
+    background-color: var(--red-200);
+    color: var(--white);
+    transition: background-color var(--transition);
+}
+
+.button--red:hover {
+    background-color: var(--red-300);
+}
+
+.button--green {
+    background-color: var(--green-300);
+    color: var(--white);
+    transition: background-color var(--transition);
+}
+
+.button--green:hover,
+.button--green:focus {
+    background-color: var(--green-400);
+}
+
+.place-ship-btn {
+    background-color: var(--blue--500);
+    transition: background-color var(--transition);
+}
+
+.place-ship-btn:hover,
+.place-ship-btn:focus {
+    background-color: var(--blue--400);
+}
+
+@media screen and (max-width: 1199.9px) {
+
+    .boards-box {
+        flex-direction: column;
+        gap: 3rem;
+    }
+}
+
+@media screen and (max-width: 767.9px) {
+    .place-btn-box {
+        flex-direction: column;
+        width: 100%;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .controller-box {
+        width: 100%;
+    }
+
+    .main-nav-btn-box {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .button--small {
+        width: 80%;
+    }
+
+    .button--large {
+        width: 80%;
+    }
+
+    .gameboard {
+        width: 300px;
+        height: 300px;
+    }
 }

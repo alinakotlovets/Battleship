@@ -8,8 +8,8 @@ function setSelectedShip(value) {
     selectedShip = value;
 }
 
-function placeShipBnt(placeBtnBox) {
-    placeBtnBox.addEventListener("click", (e) => {
+function placeShipBnt(placeBox) {
+    placeBox.addEventListener("click", (e) => {
         let item = e.target.closest(".place-ship-btn");
         if (!item) return;
         selectedShip = {

@@ -5,9 +5,14 @@ contentBox.append(boardsBox);
 
 function makeBoard(player) {
     const gameboardBox = document.createElement("div");
+    const boardWrapper = document.createElement("div");
+    boardWrapper.classList.add("board-wrapper");
     gameboardBox.classList.add('gameboard');
     gameboardBox.dataset.player = player.isComputer ? "computer" : "real";
-    boardsBox.append(gameboardBox);
+    const gameboardBoxTitle = document.createElement("h3");
+    gameboardBoxTitle.innerText = player.isComputer ? "Computer board" : "Your board";
+    boardWrapper.append(gameboardBoxTitle, gameboardBox);
+    boardsBox.append(boardWrapper);
     for (let row = 0; row < player.gameboard.board.length; row++) {
         for (let col = 0; col < player.gameboard.board[row].length; col++) {
             let button = document.createElement('button');

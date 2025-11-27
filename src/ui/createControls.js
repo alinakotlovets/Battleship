@@ -3,11 +3,13 @@ const initHoverPreview = require("./hoverPreview");
 function createControls() {
     const contentBox = document.querySelector(".content-box");
 
+    const battleShipTitle = document.createElement("h1");
     const controllerBox = document.createElement("div");
     const winnerBox = document.createElement("div");
-    const winnerText = document.createElement("h1");
+    const winnerText = document.createElement("h2");
     const startNewGame = document.createElement("button");
 
+    battleShipTitle.innerText = 'Battleship';
     startNewGame.innerText = "Start new game";
     winnerBox.classList.add("winner-box");
     winnerBox.style.display = "none";
@@ -22,14 +24,27 @@ function createControls() {
     startGameBtn.innerText = "Start game";
     rotateShipBtn.innerText = "Rotate ship";
     randomPlaceShipsBtn.innerText = "Random place ships";
-    randomPlaceShipsBtn.classList.add("blue-btn");
+
+    randomPlaceShipsBtn.classList.add("button--primary", "button--small");
+    rotateShipBtn.classList.add("button--primary", "button--small");
+    startGameBtn.classList.add("button--green", "button--small");
+    resetChoiceBtn.classList.add("button--red", "button--small");
+    startNewGame.classList.add("button--green", "button--large");
 
     const mainNavBtnBox = document.createElement("div");
     const placeBtnBox = document.createElement("div");
+    const placeBox = document.createElement("div");
+    const placeBoxTitle = document.createElement("h2");
 
     mainNavBtnBox.classList.add("main-nav-btn-box");
     placeBtnBox.classList.add("place-btn-box");
+    placeBox.classList.add("place-box");
     controllerBox.classList.add("controller-box");
+    placeBoxTitle.innerText = 'Ships to place:'
+    // computerBoardBox.classList.add("players-board-box");
+    // playerBoardBox.classList.add("players-board-box");
+    // playerBoardBoxTitle.innerText = 'Player Board';
+    // computerBoardBoxTitle.innerText = 'Computer Board';
 
     const place5shipBtn = document.createElement("button");
     const place4shipBtn = document.createElement("button");
@@ -53,13 +68,14 @@ function createControls() {
     place2shipBtn.innerText = "Place ship(2)";
 
     [place5shipBtn, place4shipBtn, place3shipBtn, place3shipBtn2, place2shipBtn].forEach(btn =>
-        btn.classList.add("place-ship-btn")
+        btn.classList.add("place-ship-btn", "button--primary", "button--large")
     );
 
     placeBtnBox.append(place2shipBtn, place3shipBtn, place3shipBtn2, place4shipBtn, place5shipBtn);
+    placeBox.append(placeBoxTitle, placeBtnBox);
     mainNavBtnBox.append(randomPlaceShipsBtn, resetChoiceBtn, startGameBtn, rotateShipBtn);
-    controllerBox.append(placeBtnBox, mainNavBtnBox);
-    contentBox.prepend(controllerBox);
+    controllerBox.append(placeBox, mainNavBtnBox);
+    contentBox.prepend(battleShipTitle, controllerBox);
     contentBox.prepend(winnerBox);
 
     return {
@@ -71,7 +87,7 @@ function createControls() {
         startGameBtn,
         rotateShipBtn,
         resetChoiceBtn,
-        placeBtnBox,
+        placeBox,
         place5shipBtn,
         place4shipBtn,
         place3shipBtn,
