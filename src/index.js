@@ -16,6 +16,10 @@ const controls = createControls();
 const realPlayer = new Player(false);
 const computerPlayer = new Player(true);
 const shipLengthArray = [2, 3, 3, 4, 5];
+const gameState = {
+    isRealPlayerTurn: true
+};
+
 
 function setRandomPlaceShip(player) {
     shipLengthArray.forEach(length => randomPlaceShip(new Ship(length), player));
@@ -47,7 +51,8 @@ const gameController = initNewGameHandler({
     playerClickHandler,
     randomPlaceShipsBtn: controls.randomPlaceShipsBtn,
     setRandomPlaceShip,
-    resetChoiceBtn: controls.resetChoiceBtn
+    resetChoiceBtn: controls.resetChoiceBtn,
+    gameState
 });
 
 setRandomPlaceShip(computerPlayer);
@@ -63,36 +68,40 @@ document.querySelectorAll('.gameboard[data-player="real"] .board-btn').forEach(b
     btn.addEventListener("click", placingShip);
 });
 
-let isRealPlayerTurn = true;
-
 function playerClickHandler(event) {
     const targetBoard = document.querySelector('.gameboard[data-player="computer"]');
     if (!targetBoard.contains(event.target)) return;
     const item = event.target.closest(".board-btn");
     if (!item) return;
 
-    if (isRealPlayerTurn) {
+    targetBoard.style.pointerEvents = "none";
+
+    if (gameState.isRealPlayerTurn) {
         const validMove = takeTurn(realPlayer, computerPlayer, item.dataset.row, item.dataset.col);
         if (validMove === "win") {
             controls.winnerText.innerText = "You win!";
             controls.winnerBox.style.display = "flex";
-            isRealPlayerTurn = null;
+            gameState.isRealPlayerTurn = null;
             return;
         }
-        if (!validMove) return;
-        isRealPlayerTurn = false;
+        if (!validMove) {
+            targetBoard.style.pointerEvents = "auto";
+            return;
+        }
+        gameState.isRealPlayerTurn = false;
     }
 
-    if (isRealPlayerTurn === false) {
+    if (gameState.isRealPlayerTurn === false) {
         setTimeout(() => {
             const validMove = takeTurn(computerPlayer, realPlayer);
             if (validMove === "win") {
                 controls.winnerText.innerText = "Computer win!";
                 controls.winnerBox.style.display = "flex";
-                isRealPlayerTurn = null;
+                gameState.isRealPlayerTurn = null;
                 return;
             }
-            isRealPlayerTurn = true;
+            gameState.isRealPlayerTurn = true;
+            targetBoard.style.pointerEvents = "auto";
         }, 500);
     }
 }

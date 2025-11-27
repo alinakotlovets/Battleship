@@ -101,6 +101,7 @@ body {
     align-items: center;
     gap: 15rem;
     margin-top: 3rem;
+    margin-bottom: 3rem;
 }
 
 .board-wrapper {

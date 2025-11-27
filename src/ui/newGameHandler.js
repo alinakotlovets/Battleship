@@ -15,10 +15,13 @@ export function initNewGameHandler({
                                        randomPlaceShipsBtn,
                                        setRandomPlaceShip,
                                        resetChoiceBtn,
+                                       gameState
                                    }) {
 
     function remakeBoard() {
         cleanerPlayer(realPlayer);
+        cleanerPlayer(computerPlayer);
+        setRandomPlaceShip(computerPlayer);
         boardsBox.innerHTML = "";
         makeBoard(realPlayer);
         makeBoard(computerPlayer);
@@ -45,6 +48,7 @@ export function initNewGameHandler({
         e.preventDefault();
         remakeBoard();
         controllerBox.style.display = "flex";
+        gameState.isRealPlayerTurn = true;
     });
 
     randomPlaceShipsBtn.addEventListener("click", (e) => {
