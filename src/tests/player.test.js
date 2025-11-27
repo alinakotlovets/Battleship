@@ -1,6 +1,6 @@
-const Player = require('../player');
-const Gameboard = require('../gameboard');
-const Ship = require('../ship');
+const Player = require('../core/player');
+const Gameboard = require('../core/gameboard');
+const Ship = require('../core/ship');
 
 let realPlayer;
 let computerPlayer;

@@ -1,4 +1,4 @@
-const makeBoard = require("./render");
+const makeBoard = require("../ui/render");
 
 function getRandomIntInclusive(min, max) {
     min = Math.ceil(min);

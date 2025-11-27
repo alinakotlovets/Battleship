@@ -1,4 +1,4 @@
-const updateBoard = require("./events");
+const updateBoard = require("../ui/events");
 
 function takeTurn(player, otherPlayer, x, y) {
     let validMove;
